@@ -29,4 +29,5 @@ l'execution initial:
 les resultats de tous les tests:
 
 ![test2](https://user-images.githubusercontent.com/71524287/172051488-8fe8a994-b728-46c0-b8a1-4c69a7c04580.png)
-![junit2](https://user-images.githubusercontent.com/71524287/172048441-3ec017cb-54e2-4f20-99a1-e7df4705f847.png)
+
+![restest2](https://user-images.githubusercontent.com/71524287/172051536-3c935b90-fee0-4543-9811-9a40649c67dd.png)
