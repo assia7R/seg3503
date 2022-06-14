@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Date.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Date.java</span></div><h1>Date.java</h1><pre class="source lang-java linenums">public class Date {
+
+	/* Data fields */
+	private int year;
+	private int month;
+	private int day;
+
+	/* String correspondent used for displaying months */
+<span class="fc" id="L9">	String[] monthNames = {</span>
+			&quot;January&quot;, &quot;February&quot;, &quot;March&quot;,
+			&quot;April&quot;, &quot;May&quot;, &quot;June&quot;,
+			&quot;July&quot;, &quot;August&quot;, &quot;September&quot;,
+			&quot;October&quot;, &quot;November&quot;, &quot;December&quot;
+	};
+
+	//
+	// CONSTRUCTOR
+	//
+<span class="fc" id="L19">	public Date(int year, int month, int day) {</span>
+<span class="fc" id="L20">		setYear(year);</span>
+<span class="fc" id="L21">		setMonth(month);</span>
+<span class="fc" id="L22">		setDay(day);</span>
+<span class="fc" id="L23">	}</span>
+
+	public int getYear() {
+<span class="fc" id="L26">		return year;</span>
+	}
+
+	public int getMonth() {
+<span class="fc" id="L30">		return month;</span>
+	}
+
+	public int getDay() {
+<span class="fc" id="L34">		return day;</span>
+	}
+
+	/**
+	 * Check validity of the day when creating a new Date.
+	 * day must be greater or equal to 1 and
+	 *   - less or equal to 31 for months with 31 days
+	 *   - less or equal to 30 for months with 30 days,
+	 *   - less or equal to 29 for February if year is leap
+	 *   - less or equal to 30 for February if year is non-leap
+	 */
+	private void setDay(int day) {
+<span class="fc bfc" id="L46" title="All 4 branches covered.">		if (day &lt; 1 || day &gt; 31) {</span>
+<span class="fc" id="L47">			throw new IllegalArgumentException(&quot;day must between 1 and 31 (Inclusive)&quot;);</span>
+		}
+<span class="fc bfc" id="L49" title="All 4 branches covered.">		if (isThirtyDayMonth() &amp;&amp; day &gt; 30) {</span>
+<span class="fc" id="L50">			throw new IllegalArgumentException(&quot;day must less than 30 for month &quot; + monthName());</span>
+		}
+<span class="fc bfc" id="L52" title="All 6 branches covered.">		if (isFebruary() &amp;&amp; isLeapYear() &amp;&amp; day &gt; 29) {</span>
+<span class="fc" id="L53">			throw new IllegalArgumentException(&quot;day must less than 29 for month &quot; + monthName() + &quot; on a leap year.&quot;);</span>
+		}
+<span class="fc bfc" id="L55" title="All 6 branches covered.">		if (isFebruary() &amp;&amp; !isLeapYear() &amp;&amp; day &gt; 28) {</span>
+<span class="fc" id="L56">			throw new IllegalArgumentException(&quot;day must less than 28 for month &quot; + monthName() + &quot; on a non leap year.&quot;);</span>
+		}
+<span class="fc" id="L58">		this.day = day;</span>
+<span class="fc" id="L59">	}</span>
+
+	/**
+	 * Check validity of the month when creating a new Date. month must be between 1 and 12.
+	 */
+	private void setMonth(int month) {
+<span class="fc bfc" id="L65" title="All 4 branches covered.">		if (month &lt; 1 || month &gt; 12) {</span>
+<span class="fc" id="L66">			throw new IllegalArgumentException(&quot;month must be between 1 and 12.&quot;);</span>
+		}
+<span class="fc" id="L68">		this.month = month;</span>
+<span class="fc" id="L69">	}</span>
+
+	/**
+	 * Check validity of the year when creating a new Date. year must be greater than 0
+	 */
+	private void setYear(int year) {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		if (year &lt; 0) {</span>
+<span class="fc" id="L76">			throw new IllegalArgumentException(&quot;year must be greater or equal to 0.&quot;);</span>
+		}
+<span class="fc" id="L78">		this.year = year;</span>
+<span class="fc" id="L79">	}</span>
+
+	// Class methods
+	/**
+	 * Returns the date of the day following that date.
+	 *
+	 */
+	public Date nextDate() {
+<span class="fc" id="L87">		int nextYear = year, nextMonth = month, nextDay = day + 1;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">		if (isEndOfMonth()) {</span>
+<span class="fc" id="L89">			nextDay = 1;</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">			if (month == 12) {</span>
+<span class="fc" id="L91">				nextYear++;</span>
+<span class="fc" id="L92">				nextMonth = 1;</span>
+			} else {
+<span class="fc" id="L94">				nextMonth++;</span>
+			}
+		}
+<span class="fc" id="L97">		return new Date(nextYear, nextMonth, nextDay);</span>
+	}
+
+	/**
+	 *
+	 * Check if the date is a end of a month.
+	 */
+	private boolean isEndOfMonth() {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">		if(day==31){</span>
+<span class="fc" id="L106">			return true;</span>
+		}
+<span class="fc bfc" id="L108" title="All 4 branches covered.">		else if(day == 30 &amp;&amp; isThirtyDayMonth()){</span>
+<span class="fc" id="L109">			return true;</span>
+		}
+<span class="pc bpc" id="L111" title="3 of 8 branches missed.">		else if(isFebruary() &amp;&amp; (day == 29 || (day == 28 &amp;&amp; !isLeapYear()))){</span>
+<span class="fc" id="L112">			return true;</span>
+		}
+<span class="fc" id="L114">		else return false;</span>
+	}
+
+	/**
+	 * returns true if month has 30 days.
+	 */
+	private boolean isThirtyDayMonth() {
+<span class="pc bpc" id="L121" title="1 of 8 branches missed.">		if (this.month == 4 || this.month == 6 || this.month == 9 || this.month == 11)</span>
+<span class="fc" id="L122">			return true;</span>
+<span class="fc" id="L123">		else return false;</span>
+	}
+
+	/**
+	 * returns true if year is leap.
+	 * A leap year is divisible by 4 unless it is a century year. In that case, it must be divisible by 400.
+	 */
+	public boolean isLeapYear() {
+<span class="fc bfc" id="L131" title="All 2 branches covered.">		if (year % 100 == 0) {</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">			return year % 400 == 0;</span>
+		}
+<span class="fc bfc" id="L134" title="All 2 branches covered.">		return year % 4 == 0;</span>
+	}
+
+	public String toString() {
+<span class="fc" id="L138">		return year + &quot;/&quot; + monthName() + &quot;/&quot; + day;</span>
+	}
+
+	public boolean equals(Object obj) {
+<span class="fc bfc" id="L142" title="All 2 branches covered.">		if (! (obj instanceof Date)) return false;</span>
+<span class="fc" id="L143">		Date od = (Date)obj;</span>
+<span class="fc bfc" id="L144" title="All 6 branches covered.">		return year == od.getYear() &amp;&amp; month == od.getMonth()  &amp;&amp; day == od.getDay();</span>
+	}
+
+	private String monthName(){
+<span class="fc" id="L148">		return monthNames[this.month-1];</span>
+	}
+
+	private boolean isFebruary(){
+<span class="fc bfc" id="L152" title="All 2 branches covered.">		return this.month==2;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202105190338</span></div></body></html>
