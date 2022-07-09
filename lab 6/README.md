@@ -33,9 +33,10 @@ mvn test
 
 after I added the test
 
-![t2](https://user-images.githubusercontent.com/71524287/178125206-4faae4ca-e5cf-4c7f-98d8-fa5b17f05644.png)
 ![t1](https://user-images.githubusercontent.com/71524287/178125204-9e83f68e-3da0-43f9-9ca4-70731d5e1f50.png)
+![t2](https://user-images.githubusercontent.com/71524287/178125206-4faae4ca-e5cf-4c7f-98d8-fa5b17f05644.png)
 
-![Screen Shot 2022-07-09 at 5 20 38 PM](https://user-images.githubusercontent.com/71524287/178125219-0bfb8c69-56e7-40c4-a6ff-f01d6ee3cf28.png)
 ![Screen Shot 2022-07-09 at 5 20 03 PM](https://user-images.githubusercontent.com/71524287/178125217-5debd693-9ce9-470e-bae5-3007506705d5.png)
+![Screen Shot 2022-07-09 at 5 20 38 PM](https://user-images.githubusercontent.com/71524287/178125219-0bfb8c69-56e7-40c4-a6ff-f01d6ee3cf28.png)
+
 
