@@ -46,9 +46,11 @@ How to fix them: Delete the if statements
 
 bug 18
 ![Screen Shot 2022-07-22 at 1 14 44 PM](https://user-images.githubusercontent.com/71524287/180490808-9c73abcd-bd20-4a01-9774-6916cb53fe7c.png)
+replaced else if with else
 
+16/18 of the bugs were fixed using SpotBugs, here is the final analysis:
 
-
+![Screen Shot 2022-07-22 at 1 35 01 PM](https://user-images.githubusercontent.com/71524287/180493912-808322d8-dd80-4706-b851-e1335b3a4597.png)
 
 
 
